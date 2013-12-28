@@ -46,7 +46,7 @@ public:
         if (_isCopy)
         {
             _data = new T[size];
-            std::memcpy(_data, data, size);
+            std::copy(data, data + size, _data);
         }
         else
         {

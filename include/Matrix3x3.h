@@ -48,7 +48,7 @@ public:
 
     Matrix3x3(const T matrix[DIMENSION])
     {
-        std::memcpy(_data, matrix, sizeof(_data));
+        std::copy(matrix, matrix + DIMENSION, _data);
     }
 
     Matrix3x3(
@@ -114,7 +114,7 @@ public:
     {
         T data[DIMENSION];
 
-        std::memcpy(data, _data, sizeof(data));
+        std::copy(_data, _data + DIMENSION, data);
 
         std::sort(data, data + DIMENSION);
 
