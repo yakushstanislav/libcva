@@ -43,12 +43,12 @@ private:
 public:
     Matrix3x3()
     {
-        memset(_data, 0, sizeof(_data));
+        std::fill(_data, _data + DIMENSION, 0);
     }
 
     Matrix3x3(const T matrix[DIMENSION])
     {
-        memcpy(_data, matrix, sizeof(_data));
+        std::memcpy(_data, matrix, sizeof(_data));
     }
 
     Matrix3x3(
@@ -114,7 +114,7 @@ public:
     {
         T data[DIMENSION];
 
-        memcpy(data, _data, sizeof(data));
+        std::memcpy(data, _data, sizeof(data));
 
         std::sort(data, data + DIMENSION);
 

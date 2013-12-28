@@ -35,7 +35,7 @@ public:
         _size = width * height;
         _data = new T[_size];
 
-        memset(_data, 0, _size);
+        std::fill(_data, _data + _size, 0);
     }
 
     ImagePlane(const T* data, std::size_t size, std::size_t width, std::size_t height, std::size_t stride, bool copy = false) :
@@ -46,7 +46,7 @@ public:
         if (_isCopy)
         {
             _data = new T[size];
-            memcpy(_data, data, size);
+            std::memcpy(_data, data, size);
         }
         else
         {
