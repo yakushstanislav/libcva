@@ -81,6 +81,11 @@ public:
         _data[y * _stride + x] = value;
     }
 
+    inline T operator[](std::size_t index) const
+    {
+        return getPixel(index);
+    }
+
     inline std::size_t pixels() const
     {
         return _width * _height;
