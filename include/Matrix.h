@@ -49,6 +49,8 @@ public:
 
     virtual std::size_t dimension() const = 0;
 
+    virtual T operator[](std::size_t index) const = 0;
+
     virtual bool operator==(const M<T>& matrix) const = 0;
 
     virtual M<T> operator+(const M<T>& matrix) const = 0;

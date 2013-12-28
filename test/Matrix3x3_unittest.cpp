@@ -29,15 +29,15 @@ TEST(Matrix3x3, Initialization)
 {
     const Matrix3x3<unsigned char> matrix(10, 20, 30, 40, 50, 60, 70, 80, 90);
 
-    EXPECT_EQ(matrix.get(0), 10);
-    EXPECT_EQ(matrix.get(1), 20);
-    EXPECT_EQ(matrix.get(2), 30);
-    EXPECT_EQ(matrix.get(3), 40);
-    EXPECT_EQ(matrix.get(4), 50);
-    EXPECT_EQ(matrix.get(5), 60);
-    EXPECT_EQ(matrix.get(6), 70);
-    EXPECT_EQ(matrix.get(7), 80);
-    EXPECT_EQ(matrix.get(8), 90);
+    EXPECT_EQ(matrix[0], 10);
+    EXPECT_EQ(matrix[1], 20);
+    EXPECT_EQ(matrix[2], 30);
+    EXPECT_EQ(matrix[3], 40);
+    EXPECT_EQ(matrix[4], 50);
+    EXPECT_EQ(matrix[5], 60);
+    EXPECT_EQ(matrix[6], 70);
+    EXPECT_EQ(matrix[7], 80);
+    EXPECT_EQ(matrix[8], 90);
 }
 
 TEST(Matrix3x3, SetValue)

@@ -136,11 +136,16 @@ public:
         return DIMENSION;
     }
 
+    T operator[](std::size_t index) const override
+    {
+        return get(index);
+    }
+
     bool operator==(const Matrix3x3<T>& matrix) const override
     {
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
-            if (_data[i] != matrix.get(i))
+            if (_data[i] != matrix[i])
                 return false;
         }
 
@@ -153,7 +158,7 @@ public:
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
-            data[i] = _data[i] + matrix.get(i);
+            data[i] = _data[i] + matrix[i];
         }
 
         return data;
@@ -165,7 +170,7 @@ public:
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
-            data[i] = _data[i] - matrix.get(i);
+            data[i] = _data[i] - matrix[i];
         }
 
         return data;
