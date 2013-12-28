@@ -66,35 +66,35 @@ public:
         _data[8] = n9;
     }
 
-    inline T get(std::size_t index) const
+    inline T get(std::size_t index) const override
     {
         assert(index < DIMENSION);
 
         return _data[index];
     }
 
-    inline T get(std::size_t row, std::size_t column) const
+    inline T get(std::size_t row, std::size_t column) const override
     {
         assert(row < ROWS && column < COLUMNS);
 
         return _data[row * COLUMNS + column];
     }
 
-    inline void set(std::size_t index, T value)
+    inline void set(std::size_t index, T value) override
     {
         assert(index < DIMENSION);
 
         _data[index] = value;
     }
 
-    inline void set(std::size_t row, std::size_t column, T value)
+    inline void set(std::size_t row, std::size_t column, T value) override
     {
         assert(row < ROWS && column < COLUMNS);
 
         _data[row * COLUMNS + column] = value;
     }
 
-    Matrix3x3<T> transpose() const
+    Matrix3x3<T> transpose() const override
     {
         T data[DIMENSION];
 
@@ -109,7 +109,7 @@ public:
         return data;
     }
 
-    T sum() const
+    T sum() const override
     {
         T sum = 0;
 
@@ -121,22 +121,22 @@ public:
         return sum;
     }
 
-    std::size_t rows() const
+    std::size_t rows() const override
     {
         return ROWS;
     }
 
-    std::size_t columns() const
+    std::size_t columns() const override
     {
         return COLUMNS;
     }
 
-    std::size_t dimension() const
+    std::size_t dimension() const override
     {
         return DIMENSION;
     }
 
-    bool operator==(const Matrix3x3<T>& matrix) const
+    bool operator==(const Matrix3x3<T>& matrix) const override
     {
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -147,7 +147,7 @@ public:
         return true;
     }
 
-    Matrix3x3<T> operator+(const Matrix3x3<T>& matrix) const
+    Matrix3x3<T> operator+(const Matrix3x3<T>& matrix) const override
     {
         T data[DIMENSION];
 
@@ -159,7 +159,7 @@ public:
         return data;
     }
 
-    Matrix3x3<T> operator-(const Matrix3x3<T>& matrix) const
+    Matrix3x3<T> operator-(const Matrix3x3<T>& matrix) const override
     {
         T data[DIMENSION];
 
@@ -171,7 +171,7 @@ public:
         return data;
     }
 
-    Matrix3x3<T> operator*(const Matrix3x3<T>& matrix) const
+    Matrix3x3<T> operator*(const Matrix3x3<T>& matrix) const override
     {
         T data[DIMENSION] = { 0 };
 
@@ -189,7 +189,7 @@ public:
         return data;
     }
 
-    Matrix3x3<T> operator+(const T value) const
+    Matrix3x3<T> operator+(const T value) const override
     {
         T data[DIMENSION];
 
@@ -201,7 +201,7 @@ public:
         return data;
     }
 
-    Matrix3x3<T> operator-(const T value) const
+    Matrix3x3<T> operator-(const T value) const override
     {
         T data[DIMENSION];
 
@@ -213,7 +213,7 @@ public:
         return data;
     }
 
-    Matrix3x3<T> operator*(const T value) const
+    Matrix3x3<T> operator*(const T value) const override
     {
         T data[DIMENSION];
 
@@ -225,7 +225,7 @@ public:
         return data;
     }
 
-    Matrix3x3<T> operator/(const T value) const
+    Matrix3x3<T> operator/(const T value) const override
     {
         T data[DIMENSION];
 
