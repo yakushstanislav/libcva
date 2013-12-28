@@ -23,8 +23,6 @@
 #ifndef __CVA_FILTER_H__
 #define __CVA_FILTER_H__
 
-#include "Matrix3x3.h"
-
 namespace CVA {
 
 template<typename T>

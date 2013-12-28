@@ -23,8 +23,15 @@
 #ifndef __CVA_H__
 #define __CVA_H__
 
-#include "Image.h"
+#include <cstddef>
+#include <cstring>
+#include <cassert>
+#include <algorithm>
+#include <vector>
+#include <map>
+
 #include "ImagePlane.h"
+#include "Image.h"
 #include "Matrix.h"
 #include "Matrix3x3.h"
 #include "Base.h"

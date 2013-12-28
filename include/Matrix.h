@@ -23,8 +23,6 @@
 #ifndef __CVA_MATRIX_H__
 #define __CVA_MATRIX_H__
 
-#include <cstddef>
-
 namespace CVA {
 
 template<template<typename> class M, typename T>

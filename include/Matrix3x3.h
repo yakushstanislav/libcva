@@ -23,13 +23,6 @@
 #ifndef __CVA_MATRIX3X3_H__
 #define __CVA_MATRIX3X3_H__
 
-#include <cstddef>
-#include <cstring>
-#include <cassert>
-#include <algorithm>
-
-#include "Matrix.h"
-
 namespace CVA {
 
 template<typename T>

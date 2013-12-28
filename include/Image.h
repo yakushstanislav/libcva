@@ -23,13 +23,6 @@
 #ifndef __CVA_IMAGE_H__
 #define __CVA_IMAGE_H__
 
-#include <cstddef>
-#include <cassert>
-#include <cstring>
-#include <vector>
-
-#include "ImagePlane.h"
-
 namespace CVA {
 
 const int MAX_IMAGE_PLANES = 3;

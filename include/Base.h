@@ -23,10 +23,6 @@
 #ifndef __CVA_BASE_H__
 #define __CVA_BASE_H__
 
-#include <map>
-
-#include "Image.h"
-
 namespace CVA {
 
 template<typename T>
