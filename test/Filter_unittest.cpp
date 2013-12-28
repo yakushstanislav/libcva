@@ -27,11 +27,18 @@ using namespace CVA;
 
 TEST(Filter, MatrixFilter3x3)
 {
-    Matrix3x3<int> matrix1(110, 120, 130, 210, 220, 230, 310, 320, 330);
-    Matrix3x3<double> matrix2(12, 14, 41, 43, 84, 24, 2, 1, 43);
-    Matrix3x3<int> convolution1(0, 1, 0, 0, 0, 0, 0, 0, 0);
-    Matrix3x3<double> convolution2(0.5, 0.75, 0.5, 0.75, 1.0, 0.75, 0.5, 0.75, 0.5);
+    const Matrix3x3<int> matrix1(110, 120, 130, 210, 220, 230, 310, 320, 330);
+    const Matrix3x3<double> matrix2(12, 14, 41, 43, 84, 24, 2, 1, 43);
+    const Matrix3x3<int> convolution1(0, 1, 0, 0, 0, 0, 0, 0, 0);
+    const Matrix3x3<double> convolution2(0.5, 0.75, 0.5, 0.75, 1.0, 0.75, 0.5, 0.75, 0.5);
 
     EXPECT_EQ(applyMatrixFilter3x3(matrix1, convolution1), 120);
     EXPECT_EQ(applyMatrixFilter3x3(matrix2, convolution2, 6), 32.416666666666664);
+}
+
+TEST(Filter, MedianFilter3x3)
+{
+    const Matrix3x3<int> matrix(10, 50, 200, 150, 70, 30, 20, 15, 80);
+
+    EXPECT_EQ(applyMedianFilter3x3(matrix), 50);
 }

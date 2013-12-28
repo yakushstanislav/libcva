@@ -62,6 +62,28 @@ void applyMatrixFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest, const M
     }
 }
 
+template<typename T>
+inline T applyMedianFilter3x3(const Matrix3x3<T>& matrix)
+{
+    return matrix.sort()[4];
+}
+
+template<typename T>
+T applyMedianFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest)
+{
+    assert(src.width() == dest.width() && src.height() == src.height());
+
+    for (std::size_t x = 1; x < src.width() - 1; x++)
+    {
+        for (std::size_t y = 1; y < src.height() - 1; y++)
+        {
+            const Matrix3x3<T>& matrix = getMatrix3x3(src, x, y);
+
+            dest.setPixel(x, y, applyMedianFilter3x3(matrix));
+        }
+    }
+}
+
 };
 
 #endif
