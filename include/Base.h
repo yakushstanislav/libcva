@@ -39,11 +39,8 @@ void getPixelStat(const ImagePlane<T>& plane, T& minPixelValue, T& maxPixelValue
     {
         const T pixel = plane[i];
 
-        if (pixel < minPixelValue)
-            minPixelValue = pixel;
-
-        if (pixel > maxPixelValue)
-            maxPixelValue = pixel;
+        minPixelValue = std::min(minPixelValue, pixel);
+        maxPixelValue = std::max(maxPixelValue, pixel);
 
         averagePixelValue += pixel;
     }
