@@ -74,6 +74,17 @@ TEST(Matrix3x3, Transponse)
     EXPECT_TRUE(matrix == matrixTransposed);
 }
 
+TEST(Matrix3x3, Sort)
+{
+    const Matrix3x3<int> matrix1(1, 10, 2, 20, 15, 30, 5, 100, 50);
+    const Matrix3x3<double> matrix2(1.0, 10.5, -0.5, 100.0, 0.0, 7.0, 15.0, 8.0, 30.0);
+    const Matrix3x3<int> result1(1, 2, 5, 10, 15, 20, 30, 50, 100);
+    const Matrix3x3<double> result2(-0.5, 0.0, 1.0, 7.0, 8.0, 10.5, 15.0, 30.0, 100.0);
+
+    EXPECT_TRUE(matrix1.sort() == result1);
+    EXPECT_TRUE(matrix2.sort() == result2);
+}
+
 TEST(Matrix3x3, Sum)
 {
     const Matrix3x3<int> matrix1(1, 2, 3, 4, 5, 6, 7, 8, 9);

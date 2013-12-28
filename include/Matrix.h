@@ -41,6 +41,8 @@ public:
 
     virtual M<T> transpose() const = 0;
 
+    virtual M<T> sort() const = 0;
+
     virtual T sum() const = 0;
 
     virtual std::size_t rows() const = 0;

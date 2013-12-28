@@ -26,6 +26,7 @@
 #include <cstddef>
 #include <cstring>
 #include <cassert>
+#include <algorithm>
 
 #include "Matrix.h"
 
@@ -105,6 +106,17 @@ public:
                 data[j * COLUMNS + i] = _data[i * COLUMNS + j];
             }
         }
+
+        return data;
+    }
+
+    inline Matrix3x3<T> sort() const override
+    {
+        T data[DIMENSION];
+
+        memcpy(data, _data, sizeof(data));
+
+        std::sort(data, data + DIMENSION);
 
         return data;
     }
