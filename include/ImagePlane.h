@@ -67,6 +67,11 @@ public:
         return _data[index];
     }
 
+    inline T operator[](std::size_t index) const
+    {
+        return getPixel(index);
+    }
+
     inline T getPixel(std::size_t x, std::size_t y) const
     {
         assert(x < _width && y < _height);
@@ -81,9 +86,17 @@ public:
         _data[y * _stride + x] = value;
     }
 
-    inline T operator[](std::size_t index) const
+    inline bool operator==(const ImagePlane<T>& plane) const
     {
-        return getPixel(index);
+        assert(width() == plane.width() && height() == plane.height());
+
+        for (std::size_t i = 0; i < plane.pixels(); i++)
+        {
+            if (getPixel(i) != plane[i])
+                return false;
+        }
+
+        return true;
     }
 
     inline std::size_t pixels() const
