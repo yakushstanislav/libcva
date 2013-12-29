@@ -62,7 +62,7 @@ public:
 
     inline T getPixel(std::size_t index) const
     {
-        assert(index < _width * _height);
+        assert(index < pixels());
 
         return _data[index];
     }
@@ -74,14 +74,21 @@ public:
 
     inline T getPixel(std::size_t x, std::size_t y) const
     {
-        assert(x < _width && y < _height);
+        assert(x < width() && y < height());
 
         return _data[y * _stride + x];
     }
 
+    inline void setPixel(std::size_t index, T value)
+    {
+        assert(index < pixels());
+
+        _data[index] = value;
+    }
+
     inline void setPixel(std::size_t x, std::size_t y, T value)
     {
-        assert(x < _width && y < _height);
+        assert(x < width() && y < height());
 
         _data[y * _stride + x] = value;
     }
