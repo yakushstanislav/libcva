@@ -93,6 +93,18 @@ public:
         _data[y * _stride + x] = value;
     }
 
+    inline ImagePlane<T>& operator=(const ImagePlane<T>& plane)
+    {
+        assert(width() == plane.width() && height() == plane.height());
+
+        for (std::size_t i = 0; i < pixels(); i++)
+        {
+            setPixel(i, plane[i]);
+        }
+
+        return *this;
+    }
+
     inline bool operator==(const ImagePlane<T>& plane) const
     {
         assert(width() == plane.width() && height() == plane.height());
