@@ -116,14 +116,7 @@ public:
 
     inline T sum() const override
     {
-        T sum = 0;
-
-        for (std::size_t i = 0; i < DIMENSION; i++)
-        {
-            sum += _data[i];
-        }
-
-        return sum;
+        return std::accumulate(_data, _data + DIMENSION, (T)0);
     }
 
     inline std::size_t rows() const override
