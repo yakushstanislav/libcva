@@ -34,7 +34,7 @@ if (BUILD_TESTS)
         ${TESTS_PATH}/Base_unittest.cpp
         ${TESTS_PATH}/Matrix3x3_unittest.cpp
         ${TESTS_PATH}/Filter_unittest.cpp)
-    target_link_libraries(${TESTNAME} gtest)
+    target_link_libraries(${TESTNAME} gtest.a -lpthread)
 endif()
 
 #install(TARGETS ${TARGET} LIBRARY DESTINATION ${INSTALL_LIBRARY_DIR} COMPONENT ${TARGET})
