@@ -25,6 +25,8 @@
 
 namespace CVA {
 
+namespace Base {
+
 template<typename T>
 void getPixelStat(const ImagePlane<T>& plane, T& minPixelValue, T& maxPixelValue, float& averagePixelValue)
 {
@@ -78,6 +80,8 @@ Matrix3x3<T> getMatrix3x3(const ImagePlane<T>& plane, std::size_t x, std::size_t
 
     return matrix;
 }
+
+};
 
 };
 

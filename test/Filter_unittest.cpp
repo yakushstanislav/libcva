@@ -24,6 +24,7 @@
 #include <cva/cva.h>
 
 using namespace CVA;
+using namespace CVA::Filter;
 
 TEST(Filter, MatrixFilter3x3)
 {

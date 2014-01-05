@@ -27,6 +27,7 @@
 #include "LenaGray8.h"
 
 using namespace CVA;
+using namespace CVA::Base;
 
 TEST(Base, GetPixelStat)
 {

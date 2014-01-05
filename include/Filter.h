@@ -25,6 +25,8 @@
 
 namespace CVA {
 
+namespace Filter {
+
 template<typename T>
 T applyMatrixFilter3x3(const Matrix3x3<T>& matrix, const Matrix3x3<T>& convolution, int div = 1, T offset = 0)
 {
@@ -52,7 +54,7 @@ void applyMatrixFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest, const M
     {
         for (std::size_t y = 1; y < src.height() - 1; y++)
         {
-            const Matrix3x3<T>& matrix = getMatrix3x3(src, x, y);
+            const Matrix3x3<T>& matrix = Base::getMatrix3x3(src, x, y);
             const T pixel = applyMatrixFilter3x3(matrix, convolution, div, offset);
 
             dest.setPixel(x, y, pixel);
@@ -75,12 +77,14 @@ T applyMedianFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest)
     {
         for (std::size_t y = 1; y < src.height() - 1; y++)
         {
-            const Matrix3x3<T>& matrix = getMatrix3x3(src, x, y);
+            const Matrix3x3<T>& matrix = Base::getMatrix3x3(src, x, y);
 
             dest.setPixel(x, y, applyMedianFilter3x3(matrix));
         }
     }
 }
+
+};
 
 };
 
