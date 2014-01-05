@@ -34,8 +34,6 @@ public:
     {
         _size = width * height;
         _data = new T[_size];
-
-        std::fill(_data, _data + _size, 0);
     }
 
     ImagePlane(const T* data, std::size_t size, std::size_t width, std::size_t height, std::size_t stride, bool copy = false) :
@@ -77,6 +75,11 @@ public:
         assert(x < width() && y < height());
 
         return _data[y * _stride + x];
+    }
+
+    inline void setPixel(T value)
+    {
+        std::fill(_data, _data + _size, value);
     }
 
     inline void setPixel(std::size_t index, T value)
