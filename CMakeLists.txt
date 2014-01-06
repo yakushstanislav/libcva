@@ -31,6 +31,7 @@ if (BUILD_TESTS)
     include_directories(${TESTS_PATH}/img)
     add_executable(${TESTNAME}
         ${TESTS_PATH}/test.cpp
+        ${TESTS_PATH}/ImagePlane_unittest.cpp
         ${TESTS_PATH}/Base_unittest.cpp
         ${TESTS_PATH}/Matrix3x3_unittest.cpp
         ${TESTS_PATH}/Filter_unittest.cpp)
