@@ -44,11 +44,12 @@ public:
         if (_isCopy)
         {
             _data = new T[size];
+
             std::copy(data, data + size, _data);
         }
         else
         {
-            _data = (T*)data;
+            _data = const_cast<T*>(data);
         }
     }
 
@@ -75,6 +76,20 @@ public:
         assert(x < width() && y < height());
 
         return _data[y * _stride + x];
+    }
+
+    inline T* getPixelPtr(std::size_t index) const
+    {
+        assert(index < pixels());
+
+        return &_data[index];
+    }
+
+    inline T* getPixelPtr(std::size_t x, std::size_t y) const
+    {
+        assert(x < width() && y < height());
+
+        return &_data[y * _stride + x];
     }
 
     inline void setPixel(T value)
@@ -123,7 +138,7 @@ public:
 
     inline std::size_t pixels() const
     {
-        return _width * _height;
+        return _size;
     }
 
     inline T* data() const
@@ -133,7 +148,7 @@ public:
 
     inline std::size_t size() const
     {
-        return _size;
+        return _size * sizeof(T);
     }
 
     inline std::size_t width() const
