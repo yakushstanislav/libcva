@@ -126,12 +126,12 @@ TEST(ImagePlane, SetPixelByIndex)
 
     for (std::size_t i = 0; i < plane.pixels(); i++)
     {
-        plane.setPixel(i, (unsigned char)i);
+        plane.setPixel(i, i % 256);
     }
 
     for (std::size_t i = 0; i < plane.pixels(); i++)
     {
-        EXPECT_EQ(plane.getPixel(i), (unsigned char)i);
+        EXPECT_EQ(plane.getPixel(i), i % 256);
     }
 }
 
@@ -143,7 +143,7 @@ TEST(ImagePlane, SetPixelByXY)
     {
         for (std::size_t y = 0; y < plane.height(); y++)
         {
-            plane.setPixel(x, y, (x + y) / 10);
+            plane.setPixel(x, y, (x + y) % 256);
         }
     }
 
@@ -151,7 +151,7 @@ TEST(ImagePlane, SetPixelByXY)
     {
         for (std::size_t y = 0; y < plane.height(); y++)
         {
-            EXPECT_EQ(plane.getPixel(x, y), (x + y) / 10);
+            EXPECT_EQ(plane.getPixel(x, y), (x + y) % 256);
         }
     }
 }
@@ -164,7 +164,7 @@ TEST(ImagePlane, Copy)
     {
         for (std::size_t y = 0; y < plane1.height(); y++)
         {
-            plane1.setPixel(x, y, (x + y) / 10);
+            plane1.setPixel(x, y, (x + y) % 256);
         }
     }
 
@@ -176,7 +176,7 @@ TEST(ImagePlane, Copy)
     {
         for (std::size_t y = 0; y < plane2.height(); y++)
         {
-            EXPECT_EQ(plane2.getPixel(x, y), (x + y) / 10);
+            EXPECT_EQ(plane2.getPixel(x, y), (x + y) % 256);
         }
     }
 }
@@ -190,7 +190,7 @@ TEST(ImagePlane, Compare)
 
     EXPECT_TRUE(plane1 == plane2);
 
-    plane1.setPixel(128, plane1.getPixel(128) + 1);
+    plane1.setPixel(128, ~plane1.getPixel(128));
 
     EXPECT_FALSE(plane1 == plane2);
 }
