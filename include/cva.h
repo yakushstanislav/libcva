@@ -36,5 +36,6 @@
 #include "Matrix3x3.h"
 #include "Base.h"
 #include "Filter.h"
+#include "Drawing.h"
 
 #endif
