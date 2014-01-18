@@ -113,7 +113,10 @@ void drawLines(ImagePlane<T>& plane, const std::vector<Point>& points, T value)
 template<typename T>
 void drawRectangle(ImagePlane<T>& plane, const Point& start, const Point& end, T value)
 {
-    assert(!"Not implemented");
+    drawLine(plane, start, Point(end.getX(), start.getY()), value);
+    drawLine(plane, start, Point(start.getX(), end.getY()), value);
+    drawLine(plane, Point(end.getX(), start.getY()), end, value);
+    drawLine(plane, Point(start.getX(), end.getY()), end, value);
 }
 
 };
