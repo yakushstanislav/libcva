@@ -20,24 +20,44 @@
    SOFTWARE.
 */
 
-#ifndef __CVA_H__
-#define __CVA_H__
+#ifndef __CVA_POINT_H__
+#define __CVA_POINT_H__
 
-#include <cstddef>
-#include <cstring>
-#include <cassert>
-#include <algorithm>
-#include <vector>
-#include <map>
+namespace CVA {
 
-#include "ImagePlane.h"
-#include "Image.h"
-#include "Matrix.h"
-#include "Matrix3x3.h"
-#include "Base.h"
-#include "Filter.h"
-#include "Point.h"
-#include "Drawing.h"
-#include "Cropping.h"
+struct Point
+{
+public:
+    Point(std::size_t x, std::size_t y) :
+        _x(x), _y(y)
+    {
+    }
+
+    inline std::size_t getX() const
+    {
+        return _x;
+    }
+
+    inline std::size_t getY() const
+    {
+        return _y;
+    }
+
+    inline void setX(std::size_t x)
+    {
+        _x = x;
+    }
+
+    inline void setY(std::size_t y)
+    {
+        _y = y;
+    }
+
+private:
+    std::size_t _x;
+    std::size_t _y;
+};
+
+};
 
 #endif

@@ -27,39 +27,6 @@ namespace CVA {
 
 namespace Drawing {
 
-struct Point
-{
-public:
-    Point(std::size_t x, std::size_t y) :
-        _x(x), _y(y)
-    {
-    }
-
-    std::size_t getX() const
-    {
-        return _x;
-    }
-
-    std::size_t getY() const
-    {
-        return _y;
-    }
-
-    void setX(std::size_t x)
-    {
-        _x = x;
-    }
-
-    void setY(std::size_t y)
-    {
-        _y = y;
-    }
-
-private:
-    std::size_t _x;
-    std::size_t _y;
-};
-
 // Bresenham's line algorithm
 template<typename T>
 void drawLine(ImagePlane<T>& plane, const Point& start, const Point& end, T value)
