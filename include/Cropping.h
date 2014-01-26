@@ -67,7 +67,13 @@ bool cropPolygon(const ImagePlane<T>& src, ImagePlane<T>& dest, const std::vecto
         [](Point pt1, Point pt2) { return pt1.getY() < pt2.getY(); });
 
     std::size_t minPointValueX = minMaxPointValueX.first->getX();
+    std::size_t maxPointValueX = minMaxPointValueX.second->getX();
+
     std::size_t minPointValueY = minMaxPointValueY.first->getY();
+    std::size_t maxPointValueY = minMaxPointValueY.second->getY();
+
+    assert(dest.width() >= (maxPointValueX - minPointValueX) &&
+        dest.height() >= (maxPointValueY - minPointValueY));
 
     for (std::size_t x = 0; x < src.width(); x++)
     {
