@@ -95,6 +95,9 @@ void cropRectangle(const ImagePlane<T>& src, ImagePlane<T>& dest, const Point& s
     const std::size_t minPointValueY = std::min(start.getY(), end.getY());
     const std::size_t maxPointValueY = std::max(start.getY(), end.getY());
 
+    assert(dest.width() >= (maxPointValueX - minPointValueX) &&
+        dest.height() >= (maxPointValueY - minPointValueY));
+
     for (std::size_t x = minPointValueX; x < maxPointValueX; x++)
     {
         for (std::size_t y = minPointValueY; y < maxPointValueY; y++)
