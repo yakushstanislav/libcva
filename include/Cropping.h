@@ -32,14 +32,14 @@ static bool isPointInPolygon(const Point& point, const std::vector<Point>& point
 {
     bool result = false;
 
-    for (size_t i = 0, j = points.size() - 1; i < points.size(); i++)
+    for (std::size_t i = 0, j = points.size() - 1; i < points.size(); i++)
     {
-        size_t x = point.getX();
-        size_t y = point.getY();
-        size_t currX = points[i].getX();
-        size_t currY = points[i].getY();
-        size_t prevX = points[j].getX();
-        size_t prevY = points[j].getY();
+        const std::size_t x = point.getX();
+        const std::size_t y = point.getY();
+        const std::size_t currX = points[i].getX();
+        const std::size_t currY = points[i].getY();
+        const std::size_t prevX = points[j].getX();
+        const std::size_t prevY = points[j].getY();
 
         if (currY < y && prevY >= y || prevY < y && currY >= y)
         {
@@ -60,17 +60,17 @@ bool cropPolygon(const ImagePlane<T>& src, ImagePlane<T>& dest, const std::vecto
 {
     assert(points.size() >= 3);
 
-    auto minMaxPointValueX = std::minmax_element(points.begin(), points.end(),
+    const auto minMaxPointValueX = std::minmax_element(points.begin(), points.end(),
         [](Point pt1, Point pt2) { return pt1.getX() < pt2.getX(); });
 
-    auto minMaxPointValueY = std::minmax_element(points.begin(), points.end(),
+    const auto minMaxPointValueY = std::minmax_element(points.begin(), points.end(),
         [](Point pt1, Point pt2) { return pt1.getY() < pt2.getY(); });
 
-    std::size_t minPointValueX = minMaxPointValueX.first->getX();
-    std::size_t maxPointValueX = minMaxPointValueX.second->getX();
+    const std::size_t minPointValueX = minMaxPointValueX.first->getX();
+    const std::size_t maxPointValueX = minMaxPointValueX.second->getX();
 
-    std::size_t minPointValueY = minMaxPointValueY.first->getY();
-    std::size_t maxPointValueY = minMaxPointValueY.second->getY();
+    const std::size_t minPointValueY = minMaxPointValueY.first->getY();
+    const std::size_t maxPointValueY = minMaxPointValueY.second->getY();
 
     assert(dest.width() >= (maxPointValueX - minPointValueX) &&
         dest.height() >= (maxPointValueY - minPointValueY));
@@ -90,14 +90,18 @@ bool cropPolygon(const ImagePlane<T>& src, ImagePlane<T>& dest, const std::vecto
 template<typename T>
 void cropRectangle(const ImagePlane<T>& src, ImagePlane<T>& dest, const Point& start, const Point& end)
 {
-    std::vector<Point> points;
+    const std::size_t minPointValueX = std::min(start.getX(), end.getX());
+    const std::size_t maxPointValueX = std::max(start.getX(), end.getX());
+    const std::size_t minPointValueY = std::min(start.getY(), end.getY());
+    const std::size_t maxPointValueY = std::max(start.getY(), end.getY());
 
-    points.push_back(start);
-    points.push_back(Point(end.getX(), start.getY()));
-    points.push_back(end);
-    points.push_back(Point(start.getX(), end.getY()));
-
-    cropPolygon(src, dest, points);
+    for (std::size_t x = minPointValueX; x < maxPointValueX; x++)
+    {
+        for (std::size_t y = minPointValueY; y < maxPointValueY; y++)
+        {
+            dest.setPixel(x - minPointValueX, y - minPointValueY, src.getPixel(x, y));
+        }
+    }
 }
 
 };
