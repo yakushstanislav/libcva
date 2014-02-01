@@ -39,5 +39,6 @@
 #include "Point.h"
 #include "Drawing.h"
 #include "Cropping.h"
+#include "Scaling.h"
 
 #endif
