@@ -29,14 +29,15 @@ template<typename T>
 class ImagePlane
 {
 public:
-    ImagePlane(std::size_t width, std::size_t height, std::size_t stride) :
+    ImagePlane(const std::size_t width, const std::size_t height, const std::size_t stride) :
         _width(width), _height(height), _stride(stride), _isCopy(true)
     {
         _size = width * height;
         _data = new T[_size];
     }
 
-    ImagePlane(const T* data, std::size_t size, std::size_t width, std::size_t height, std::size_t stride, bool copy = false) :
+    ImagePlane(const T* data, const std::size_t size, const std::size_t width, const std::size_t height,
+        const std::size_t stride, const bool copy = false) :
         _size(size), _width(width), _height(height), _stride(stride), _isCopy(copy)
     {
         assert(data);
@@ -59,52 +60,52 @@ public:
             delete _data;
     }
 
-    inline T getPixel(std::size_t index) const
+    inline T getPixel(const std::size_t index) const
     {
         assert(index < pixels());
 
         return _data[index];
     }
 
-    inline T operator[](std::size_t index) const
+    inline T operator[](const std::size_t index) const
     {
         return getPixel(index);
     }
 
-    inline T getPixel(std::size_t x, std::size_t y) const
+    inline T getPixel(const std::size_t x, const std::size_t y) const
     {
         assert(x < width() && y < height());
 
         return _data[y * _stride + x];
     }
 
-    inline T* getPixelPtr(std::size_t index) const
+    inline T* getPixelPtr(const std::size_t index) const
     {
         assert(index < pixels());
 
         return &_data[index];
     }
 
-    inline T* getPixelPtr(std::size_t x, std::size_t y) const
+    inline T* getPixelPtr(const std::size_t x, const std::size_t y) const
     {
         assert(x < width() && y < height());
 
         return &_data[y * _stride + x];
     }
 
-    inline void setPixel(T value)
+    inline void setPixel(const T value)
     {
         std::fill(_data, _data + _size, value);
     }
 
-    inline void setPixel(std::size_t index, T value)
+    inline void setPixel(const std::size_t index, const T value)
     {
         assert(index < pixels());
 
         _data[index] = value;
     }
 
-    inline void setPixel(std::size_t x, std::size_t y, T value)
+    inline void setPixel(const std::size_t x, const std::size_t y, const T value)
     {
         assert(x < width() && y < height());
 

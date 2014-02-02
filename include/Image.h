@@ -36,20 +36,20 @@ template<typename T>
 class Image
 {
 public:
-    Image(const std::vector<ImagePlane<T> >& planes, PixelFormat format) :
+    Image(const std::vector<ImagePlane<T> >& planes, const PixelFormat format) :
         _planes(planes), _pixelFormat(format)
     {
         assert(planes.size() && planes.size() <= MAX_IMAGE_PLANES);
     }
 
-    inline ImagePlane<T>& plane(std::size_t index)
+    inline ImagePlane<T>& plane(const std::size_t index)
     {
         assert(index < _planes.size());
 
         return _planes[index];
     }
 
-    inline ImagePlane<T>& operator[](std::size_t index)
+    inline ImagePlane<T>& operator[](const std::size_t index)
     {
         return plane(index);
     }

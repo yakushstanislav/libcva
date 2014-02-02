@@ -28,7 +28,7 @@ namespace CVA {
 struct Point
 {
 public:
-    Point(std::size_t x, std::size_t y) :
+    Point(const std::size_t x, const std::size_t y) :
         _x(x), _y(y)
     {
     }
@@ -43,12 +43,12 @@ public:
         return _y;
     }
 
-    inline void setX(std::size_t x)
+    inline void setX(const std::size_t x)
     {
         _x = x;
     }
 
-    inline void setY(std::size_t y)
+    inline void setY(const std::size_t y)
     {
         _y = y;
     }

@@ -29,13 +29,13 @@ template<template<typename> class M, typename T>
 class Matrix
 {
 public:
-    virtual inline T get(std::size_t index) const = 0;
+    virtual inline T get(const std::size_t index) const = 0;
 
-    virtual inline T get(std::size_t row, std::size_t column) const = 0;
+    virtual inline T get(const std::size_t row, const std::size_t column) const = 0;
 
-    virtual inline void set(std::size_t index, T value) = 0;
+    virtual inline void set(const std::size_t index, const T value) = 0;
 
-    virtual inline void set(std::size_t row, std::size_t column, T value) = 0;
+    virtual inline void set(const std::size_t row, const std::size_t column, const T value) = 0;
 
     virtual M<T> transpose() const = 0;
 
@@ -49,7 +49,7 @@ public:
 
     virtual std::size_t dimension() const = 0;
 
-    virtual T operator[](std::size_t index) const = 0;
+    virtual T operator[](const std::size_t index) const = 0;
 
     virtual bool operator==(const M<T>& matrix) const = 0;
 

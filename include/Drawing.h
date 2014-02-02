@@ -29,7 +29,7 @@ namespace Drawing {
 
 // Bresenham's line algorithm
 template<typename T>
-void drawLine(ImagePlane<T>& plane, const Point& start, const Point& end, T value)
+void drawLine(ImagePlane<T>& plane, const Point& start, const Point& end, const T value)
 {
     int x1 = start.getX();
     int y1 = start.getY();
@@ -65,7 +65,7 @@ void drawLine(ImagePlane<T>& plane, const Point& start, const Point& end, T valu
 }
 
 template<typename T>
-void drawLines(ImagePlane<T>& plane, const std::vector<Point>& points, T value)
+void drawLines(ImagePlane<T>& plane, const std::vector<Point>& points, const T value)
 {
     assert(points.size() >= 2);
 
@@ -78,7 +78,7 @@ void drawLines(ImagePlane<T>& plane, const std::vector<Point>& points, T value)
 }
 
 template<typename T>
-void drawRectangle(ImagePlane<T>& plane, const Point& start, const Point& end, T value)
+void drawRectangle(ImagePlane<T>& plane, const Point& start, const Point& end, const T value)
 {
     drawLine(plane, start, Point(end.getX(), start.getY()), value);
     drawLine(plane, start, Point(start.getX(), end.getY()), value);

@@ -45,9 +45,9 @@ public:
     }
 
     Matrix3x3(
-        T n1, T n2, T n3,
-        T n4, T n5, T n6,
-        T n7, T n8, T n9)
+        const T n1, const T n2, const T n3,
+        const T n4, const T n5, const T n6,
+        const T n7, const T n8, const T n9)
     {
         _data[0] = n1;
         _data[1] = n2;
@@ -60,28 +60,28 @@ public:
         _data[8] = n9;
     }
 
-    inline T get(std::size_t index) const override
+    inline T get(const std::size_t index) const override
     {
         assert(index < DIMENSION);
 
         return _data[index];
     }
 
-    inline T get(std::size_t row, std::size_t column) const override
+    inline T get(const std::size_t row, const std::size_t column) const override
     {
         assert(row < ROWS && column < COLUMNS);
 
         return _data[row * COLUMNS + column];
     }
 
-    inline void set(std::size_t index, T value) override
+    inline void set(const std::size_t index, const T value) override
     {
         assert(index < DIMENSION);
 
         _data[index] = value;
     }
 
-    inline void set(std::size_t row, std::size_t column, T value) override
+    inline void set(const std::size_t row, const std::size_t column, const T value) override
     {
         assert(row < ROWS && column < COLUMNS);
 
@@ -134,7 +134,7 @@ public:
         return DIMENSION;
     }
 
-    inline T operator[](std::size_t index) const override
+    inline T operator[](const std::size_t index) const override
     {
         return get(index);
     }

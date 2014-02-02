@@ -28,7 +28,8 @@ namespace CVA {
 namespace Filter {
 
 template<typename T>
-T applyMatrixFilter3x3(const Matrix3x3<T>& matrix, const Matrix3x3<T>& convolution, int div = 1, T offset = 0)
+T applyMatrixFilter3x3(const Matrix3x3<T>& matrix, const Matrix3x3<T>& convolution,
+    const int div = 1, const T offset = 0)
 {
     assert(div);
 
@@ -46,7 +47,8 @@ T applyMatrixFilter3x3(const Matrix3x3<T>& matrix, const Matrix3x3<T>& convoluti
 }
 
 template<typename T>
-void applyMatrixFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest, const Matrix3x3<T>& convolution, int div = 1, T offset = 0)
+void applyMatrixFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest, const Matrix3x3<T>& convolution,
+    const int div = 1, const T offset = 0)
 {
     assert(src.width() == dest.width() && src.height() == dest.height());
 

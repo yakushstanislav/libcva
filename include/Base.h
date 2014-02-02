@@ -70,7 +70,7 @@ std::map<T, std::size_t> getHistogramm(const ImagePlane<T>& plane)
 }
 
 template<typename T>
-Matrix3x3<T> getMatrix3x3(const ImagePlane<T>& plane, std::size_t x, std::size_t y)
+Matrix3x3<T> getMatrix3x3(const ImagePlane<T>& plane, const std::size_t x, const std::size_t y)
 {
     const Matrix3x3<T> matrix(
         plane.getPixel(x - 1, y - 1), plane.getPixel(x, y - 1), plane.getPixel(x + 1, y - 1),
