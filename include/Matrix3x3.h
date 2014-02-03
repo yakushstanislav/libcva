@@ -178,11 +178,11 @@ public:
     {
         T data[DIMENSION] = { 0 };
 
-        for(std::size_t i = 0; i < ROWS; i++)
+        for (std::size_t i = 0; i < ROWS; i++)
         {
-            for(std::size_t j = 0; j < COLUMNS; j++)
+            for (std::size_t j = 0; j < COLUMNS; j++)
             {
-                for(std::size_t k = 0; k < COLUMNS; k++)
+                for (std::size_t k = 0; k < COLUMNS; k++)
                 {
                     data[i * COLUMNS + j] += _data[i * COLUMNS + k] * matrix.get(k, j);
                 }
