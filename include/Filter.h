@@ -71,7 +71,7 @@ inline T applyMedianFilter3x3(const Matrix3x3<T>& matrix)
 }
 
 template<typename T>
-T applyMedianFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest)
+void applyMedianFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest)
 {
     assert(src.width() == dest.width() && src.height() == dest.height());
 
