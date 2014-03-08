@@ -81,6 +81,19 @@ Matrix3x3<T> getMatrix3x3(const ImagePlane<T>& plane, const std::size_t x, const
     return matrix;
 }
 
+template<typename T>
+double getSAD(const T* src, const T* dest, std::size_t size)
+{
+    double result = 0;
+
+    for (std::size_t i = 0; i < size; i++)
+    {
+        result += std::fabs(src[i] - dest[i]);
+    }
+
+    return result;
+}
+
 };
 
 };
