@@ -20,26 +20,16 @@
    SOFTWARE.
 */
 
-#ifndef __CVA_H__
-#define __CVA_H__
+#include <gtest/gtest.h>
+#include <cva/cva.h>
 
-#include <cstddef>
-#include <cstring>
-#include <cassert>
-#include <algorithm>
-#include <vector>
-#include <map>
+using namespace CVA;
+using namespace CVA::Math;
 
-#include "ImagePlane.h"
-#include "Image.h"
-#include "Matrix.h"
-#include "Matrix3x3.h"
-#include "Base.h"
-#include "Math.h"
-#include "Filter.h"
-#include "Point.h"
-#include "Drawing.h"
-#include "Cropping.h"
-#include "Scaling.h"
+TEST(Math, GetSAD)
+{
+    const int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    const int b[] = {1, 2, 4, 4, 5, 5, 7, 9};
 
-#endif
+    EXPECT_EQ(getSAD(a, b, sizeof(a) / sizeof(int)), 3);
+}

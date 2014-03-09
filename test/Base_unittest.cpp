@@ -66,11 +66,3 @@ TEST(Base, GetHistogramm)
 
     EXPECT_EQ(planeHistogramm.size(), 202);
 }
-
-TEST(Base, GetSAD)
-{
-    const int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
-    const int b[] = {1, 2, 4, 4, 5, 5, 7, 9};
-
-    EXPECT_EQ(getSAD(a, b, sizeof(a) / sizeof(int)), 3);
-}

@@ -33,6 +33,7 @@ if (BUILD_TESTS)
         ${TESTS_PATH}/test.cpp
         ${TESTS_PATH}/ImagePlane_unittest.cpp
         ${TESTS_PATH}/Base_unittest.cpp
+        ${TESTS_PATH}/Math_unittest.cpp
         ${TESTS_PATH}/Matrix3x3_unittest.cpp
         ${TESTS_PATH}/Filter_unittest.cpp)
     target_link_libraries(${TESTNAME} gtest.a -lpthread)

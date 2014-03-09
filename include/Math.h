@@ -20,26 +20,28 @@
    SOFTWARE.
 */
 
-#ifndef __CVA_H__
-#define __CVA_H__
+#ifndef __CVA_MATH_H__
+#define __CVA_MATH_H__
 
-#include <cstddef>
-#include <cstring>
-#include <cassert>
-#include <algorithm>
-#include <vector>
-#include <map>
+namespace CVA {
 
-#include "ImagePlane.h"
-#include "Image.h"
-#include "Matrix.h"
-#include "Matrix3x3.h"
-#include "Base.h"
-#include "Math.h"
-#include "Filter.h"
-#include "Point.h"
-#include "Drawing.h"
-#include "Cropping.h"
-#include "Scaling.h"
+namespace Math {
+
+template<typename T>
+double getSAD(const T* src, const T* dest, const std::size_t size)
+{
+    double result = 0;
+
+    for (std::size_t i = 0; i < size; i++)
+    {
+        result += std::fabs(src[i] - dest[i]);
+    }
+
+    return result;
+}
+
+};
+
+};
 
 #endif
