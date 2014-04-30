@@ -28,6 +28,7 @@
 #include <cassert>
 #include <algorithm>
 #include <vector>
+#include <array>
 #include <map>
 
 #include "ImagePlane.h"

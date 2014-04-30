@@ -36,12 +36,12 @@ private:
 public:
     Matrix3x3()
     {
-        std::fill(_data, _data + DIMENSION, 0);
+        _data.fill(0);
     }
 
-    Matrix3x3(const T matrix[DIMENSION])
+    Matrix3x3(const std::array<T, DIMENSION>& data)
     {
-        std::copy(matrix, matrix + DIMENSION, _data);
+        _data = data;
     }
 
     Matrix3x3(
@@ -90,7 +90,7 @@ public:
 
     inline Matrix3x3<T> transpose() const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < COLUMNS; i++)
         {
@@ -105,18 +105,16 @@ public:
 
     inline Matrix3x3<T> sort() const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data = _data;
 
-        std::copy(_data, _data + DIMENSION, data);
-
-        std::sort(data, data + DIMENSION);
+        std::sort(data.begin(), data.end());
 
         return data;
     }
 
     inline T sum() const override
     {
-        return std::accumulate(_data, _data + DIMENSION, (T)0);
+        return std::accumulate(_data.begin(), _data.end(), (T)0);
     }
 
     inline std::size_t rows() const override
@@ -152,7 +150,7 @@ public:
 
     inline Matrix3x3<T> operator+(const Matrix3x3<T>& matrix) const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -164,7 +162,7 @@ public:
 
     inline Matrix3x3<T> operator-(const Matrix3x3<T>& matrix) const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -176,7 +174,7 @@ public:
 
     inline Matrix3x3<T> operator*(const Matrix3x3<T>& matrix) const override
     {
-        T data[DIMENSION] = { 0 };
+        std::array<T, DIMENSION> data = { 0 };
 
         for (std::size_t i = 0; i < ROWS; i++)
         {
@@ -194,7 +192,7 @@ public:
 
     inline Matrix3x3<T> operator+(const T value) const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -206,7 +204,7 @@ public:
 
     inline Matrix3x3<T> operator-(const T value) const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -218,7 +216,7 @@ public:
 
     inline Matrix3x3<T> operator*(const T value) const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -230,7 +228,7 @@ public:
 
     inline Matrix3x3<T> operator/(const T value) const override
     {
-        T data[DIMENSION];
+        std::array<T, DIMENSION> data;
 
         for (std::size_t i = 0; i < DIMENSION; i++)
         {
@@ -241,7 +239,7 @@ public:
     }
 
 private:
-    T _data[DIMENSION];
+    std::array<T, DIMENSION> _data;
 };
 
 };
