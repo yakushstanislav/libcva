@@ -34,7 +34,6 @@
 #include "ImagePlane.h"
 #include "Image.h"
 #include "Matrix.h"
-#include "Matrix3x3.h"
 #include "Base.h"
 #include "Math.h"
 #include "Filter.h"

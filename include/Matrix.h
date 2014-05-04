@@ -25,48 +25,213 @@
 
 namespace CVA {
 
-template<template<typename> class M, typename T>
+template<typename T, std::size_t ROWS, std::size_t COLUMNS>
 class Matrix
 {
+private:
+    static const std::size_t DIMENSION = ROWS * COLUMNS;
+
 public:
-    virtual inline T get(const std::size_t index) const = 0;
+    Matrix()
+    {
+        _data.fill(0);
+    }
 
-    virtual inline T get(const std::size_t row, const std::size_t column) const = 0;
+    template<typename... Ts>
+    Matrix(const Ts... args) :
+        _data({args...})
+    {
+    }
 
-    virtual inline void set(const std::size_t index, const T value) = 0;
+    Matrix(const std::array<T, DIMENSION>& data) :
+        _data(data)
+    {
+    }
 
-    virtual inline void set(const std::size_t row, const std::size_t column, const T value) = 0;
+    inline T get(const std::size_t index) const
+    {
+        assert(index < DIMENSION);
 
-    virtual M<T> transpose() const = 0;
+        return _data[index];
+    }
 
-    virtual M<T> sort() const = 0;
+    inline T get(const std::size_t row, const std::size_t column) const
+    {
+        assert(row < ROWS && column < COLUMNS);
 
-    virtual T sum() const = 0;
+        return _data[row * COLUMNS + column];
+    }
 
-    virtual std::size_t rows() const = 0;
+    inline void set(const std::size_t index, const T value)
+    {
+        assert(index < DIMENSION);
 
-    virtual std::size_t columns() const = 0;
+        _data[index] = value;
+    }
 
-    virtual std::size_t dimension() const = 0;
+    inline void set(const std::size_t row, const std::size_t column, const T value)
+    {
+        assert(row < ROWS && column < COLUMNS);
 
-    virtual T operator[](const std::size_t index) const = 0;
+        _data[row * COLUMNS + column] = value;
+    }
 
-    virtual bool operator==(const M<T>& matrix) const = 0;
+    inline Matrix<T, ROWS, COLUMNS> transpose() const
+    {
+        std::array<T, DIMENSION> data;
 
-    virtual M<T> operator+(const M<T>& matrix) const = 0;
+        for (std::size_t i = 0; i < COLUMNS; i++)
+        {
+            for (std::size_t j = 0; j < ROWS; j++)
+            {
+                data[j * COLUMNS + i] = _data[i * COLUMNS + j];
+            }
+        }
 
-    virtual M<T> operator-(const M<T>& matrix) const = 0;
+        return data;
+    }
 
-    virtual M<T> operator*(const M<T>& matrix) const = 0;
+    inline Matrix<T, ROWS, COLUMNS> sort() const
+    {
+        std::array<T, DIMENSION> data = _data;
 
-    virtual M<T> operator+(const T value) const = 0;
+        std::sort(data.begin(), data.end());
 
-    virtual M<T> operator-(const T value) const = 0;
+        return data;
+    }
 
-    virtual M<T> operator*(const T value) const = 0;
+    inline T sum() const
+    {
+        return std::accumulate(_data.begin(), _data.end(), (T)0);
+    }
 
-    virtual M<T> operator/(const T value) const = 0;
+    inline std::size_t rows() const
+    {
+        return ROWS;
+    }
+
+    inline std::size_t columns() const
+    {
+        return COLUMNS;
+    }
+
+    inline std::size_t dimension() const
+    {
+        return DIMENSION;
+    }
+
+    inline T operator[](const std::size_t index) const
+    {
+        return get(index);
+    }
+
+    inline bool operator==(const Matrix<T, ROWS, COLUMNS>& matrix) const
+    {
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            if (_data[i] != matrix[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator+(const Matrix<T, ROWS, COLUMNS>& matrix) const
+    {
+        std::array<T, DIMENSION> data;
+
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            data[i] = _data[i] + matrix[i];
+        }
+
+        return data;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator-(const Matrix<T, ROWS, COLUMNS>& matrix) const
+    {
+        std::array<T, DIMENSION> data;
+
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            data[i] = _data[i] - matrix[i];
+        }
+
+        return data;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator*(const Matrix<T, ROWS, COLUMNS>& matrix) const
+    {
+        std::array<T, DIMENSION> data = { 0 };
+
+        for (std::size_t i = 0; i < ROWS; i++)
+        {
+            for (std::size_t j = 0; j < COLUMNS; j++)
+            {
+                for (std::size_t k = 0; k < COLUMNS; k++)
+                {
+                    data[i * COLUMNS + j] += _data[i * COLUMNS + k] * matrix.get(k, j);
+                }
+            }
+        }
+
+        return data;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator+(const T value) const
+    {
+        std::array<T, DIMENSION> data;
+
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            data[i] = _data[i] + value;
+        }
+
+        return data;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator-(const T value) const
+    {
+        std::array<T, DIMENSION> data;
+
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            data[i] = _data[i] - value;
+        }
+
+        return data;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator*(const T value) const
+    {
+        std::array<T, DIMENSION> data;
+
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            data[i] = _data[i] * value;
+        }
+
+        return data;
+    }
+
+    inline Matrix<T, ROWS, COLUMNS> operator/(const T value) const
+    {
+        std::array<T, DIMENSION> data;
+
+        for (std::size_t i = 0; i < DIMENSION; i++)
+        {
+            data[i] = _data[i] / value;
+        }
+
+        return data;
+    }
+
+private:
+    std::array<T, DIMENSION> _data;
 };
+
+template<typename T>
+using Matrix3x3 = Matrix<T, 3, 3>;
 
 };
 
