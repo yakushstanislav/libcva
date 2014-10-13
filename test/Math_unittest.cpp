@@ -33,3 +33,11 @@ TEST(Math, GetSAD)
 
     EXPECT_EQ(getSAD(a, b, sizeof(a) / sizeof(int)), 3);
 }
+
+TEST(Math, GetSSD)
+{
+    const int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    const int b[] = {1, 2, 3, 5, 5, 7, 7, 10};
+
+    EXPECT_EQ(getSSD(a, b, sizeof(a) / sizeof(int)), 6);
+}

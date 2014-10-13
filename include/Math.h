@@ -40,6 +40,19 @@ double getSAD(const T* src, const T* dest, const std::size_t size)
     return result;
 }
 
+template<typename T>
+double getSSD(const T* src, const T* dest, const std::size_t size)
+{
+    double result = 0;
+
+    for (std::size_t i = 0; i < size; i++)
+    {
+        result += std::pow(src[i] - dest[i], 2);
+    }
+
+    return result;
+}
+
 };
 
 };
