@@ -27,6 +27,8 @@ namespace CVA {
 
 namespace Base {
 
+typedef std::array<std::size_t, 256> Histogram;
+
 template<typename T>
 void getPixelStat(const ImagePlane<T>& plane, T& minPixelValue, T& maxPixelValue, float& averagePixelValue)
 {
@@ -47,26 +49,16 @@ void getPixelStat(const ImagePlane<T>& plane, T& minPixelValue, T& maxPixelValue
 }
 
 template<typename T>
-std::map<T, std::size_t> getHistogramm(const ImagePlane<T>& plane)
+Histogram getHistogram(const ImagePlane<T>& plane)
 {
-    std::map<T, std::size_t> histogramm;
+    Histogram histogram = { 0 };
 
     for (std::size_t i = 0; i < plane.pixels(); i++)
     {
-        const T pixel = plane[i];
-
-        typename std::map<T, std::size_t>::iterator it = histogramm.find(pixel);
-        if (it == histogramm.end())
-        {
-            histogramm.insert(std::pair<T, std::size_t>(pixel, 1));
-        }
-        else
-        {
-            it->second++;
-        }
+        histogram[plane[i]] += 1;
     }
 
-    return histogramm;
+    return histogram;
 }
 
 template<typename T>

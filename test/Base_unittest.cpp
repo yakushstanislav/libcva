@@ -45,24 +45,13 @@ TEST(Base, GetPixelStat)
     EXPECT_EQ(averagePixelValue, 179.7310028076171875);
 }
 
-TEST(Base, GetHistogramm)
+TEST(Base, GetHistogram)
 {
     const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
         LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
 
-    std::map<unsigned char, std::size_t> planeHistogramm = getHistogramm(plane);
+    const Histogram& planeHistogram = getHistogram(plane);
 
-    auto minPixelValue = std::min_element(planeHistogramm.begin(), planeHistogramm.end(),
-        planeHistogramm.value_comp());
-
-    auto maxPixelValue = std::max_element(planeHistogramm.begin(), planeHistogramm.end(),
-        planeHistogramm.value_comp());
-
-    EXPECT_EQ(minPixelValue->first, 49);
-    EXPECT_EQ(minPixelValue->second, 1);
-
-    EXPECT_EQ(maxPixelValue->first, 255);
-    EXPECT_EQ(maxPixelValue->second, 375);
-
-    EXPECT_EQ(planeHistogramm.size(), 202);
+    EXPECT_EQ(planeHistogram[49], 1); // Min pixel value
+    EXPECT_EQ(planeHistogram[255], 375); // Max pixel value
 }
