@@ -46,11 +46,11 @@ template<typename T>
 void getPixelStat(const Histogram& histogram, T& minPixelValue, T& maxPixelValue, T& averagePixelValue)
 {
     double sumPixels = 0.0;
-    size_t numPixels = 0;
+    std::size_t numPixels = 0;
 
     minPixelValue = 255, maxPixelValue = 0;
 
-    for (size_t i = 0; i < histogram.size(); i++)
+    for (std::size_t i = 0; i < histogram.size(); i++)
     {
         if (histogram[i])
         {
