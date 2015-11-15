@@ -30,25 +30,6 @@ namespace Base {
 typedef std::array<std::size_t, 256> Histogram;
 
 template<typename T>
-void getPixelStat(const ImagePlane<T>& plane, T& minPixelValue, T& maxPixelValue, float& averagePixelValue)
-{
-    minPixelValue = maxPixelValue = plane[0];
-    averagePixelValue = 0.0;
-
-    for (std::size_t i = 0; i < plane.pixels(); i++)
-    {
-        const T pixel = plane[i];
-
-        minPixelValue = std::min(minPixelValue, pixel);
-        maxPixelValue = std::max(maxPixelValue, pixel);
-
-        averagePixelValue += pixel;
-    }
-
-    averagePixelValue /= plane.pixels();
-}
-
-template<typename T>
 Histogram getHistogram(const ImagePlane<T>& plane)
 {
     Histogram histogram = { 0 };
@@ -59,6 +40,49 @@ Histogram getHistogram(const ImagePlane<T>& plane)
     }
 
     return histogram;
+}
+
+template<typename T>
+void getPixelStat(const Histogram& histogram, T& minPixelValue, T& maxPixelValue, T& averagePixelValue)
+{
+    double sumPixels = 0.0;
+    size_t numPixels = 0;
+
+    minPixelValue = 255, maxPixelValue = 0;
+
+    for (size_t i = 0; i < histogram.size(); i++)
+    {
+        if (histogram[i])
+        {
+            minPixelValue = std::min(minPixelValue, static_cast<T>(i));
+            maxPixelValue = std::max(maxPixelValue, static_cast<T>(i));
+
+            sumPixels += histogram[i] * i;
+            numPixels += histogram[i];
+        }
+    }
+
+    averagePixelValue = static_cast<T>(sumPixels / numPixels);
+}
+
+template<typename T>
+void getPixelStat(const ImagePlane<T>& plane, T& minPixelValue, T& maxPixelValue, T& averagePixelValue)
+{
+    double sumPixels = 0.0;
+
+    minPixelValue = maxPixelValue = plane[0];
+
+    for (std::size_t i = 0; i < plane.pixels(); i++)
+    {
+        const T pixel = plane[i];
+
+        minPixelValue = std::min(minPixelValue, pixel);
+        maxPixelValue = std::max(maxPixelValue, pixel);
+
+        sumPixels += pixel;
+    }
+
+    averagePixelValue = static_cast<T>(sumPixels / plane.pixels());
 }
 
 template<typename T>

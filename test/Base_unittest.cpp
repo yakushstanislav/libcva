@@ -29,22 +29,6 @@
 using namespace CVA;
 using namespace CVA::Base;
 
-TEST(Base, GetPixelStat)
-{
-    const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
-        LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
-
-    unsigned char minPixelValue;
-    unsigned char maxPixelValue;
-    float averagePixelValue;
-
-    getPixelStat(plane, minPixelValue, maxPixelValue, averagePixelValue);
-
-    EXPECT_EQ(minPixelValue, 49);
-    EXPECT_EQ(maxPixelValue, 255);
-    EXPECT_EQ(averagePixelValue, 179.7310028076171875);
-}
-
 TEST(Base, GetHistogram)
 {
     const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
@@ -54,4 +38,38 @@ TEST(Base, GetHistogram)
 
     EXPECT_EQ(planeHistogram[49], 1); // Min pixel value
     EXPECT_EQ(planeHistogram[255], 375); // Max pixel value
+}
+
+TEST(Base, GetPixelStatFromHistoram)
+{
+    const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
+        LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
+
+    const Histogram& planeHistogram = getHistogram(plane);
+
+    unsigned char minPixelValue;
+    unsigned char maxPixelValue;
+    unsigned char averagePixelValue;
+
+    getPixelStat(planeHistogram, minPixelValue, maxPixelValue, averagePixelValue);
+
+    EXPECT_EQ(minPixelValue, 49);
+    EXPECT_EQ(maxPixelValue, 255);
+    EXPECT_EQ(averagePixelValue, 179);
+}
+
+TEST(Base, GetPixelStat)
+{
+    const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
+        LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
+
+    unsigned char minPixelValue;
+    unsigned char maxPixelValue;
+    unsigned char averagePixelValue;
+
+    getPixelStat(plane, minPixelValue, maxPixelValue, averagePixelValue);
+
+    EXPECT_EQ(minPixelValue, 49);
+    EXPECT_EQ(maxPixelValue, 255);
+    EXPECT_EQ(averagePixelValue, 179);
 }
