@@ -6,7 +6,7 @@ set(TARGET cva)
 
 option(BUILD_TESTS "Build tests for libcva" OFF)
 
-set(CMAKE_CXX_FLAGS "-std=c++0x -fPIC -O2 -funroll-loops -Wall")
+set(CMAKE_CXX_FLAGS "-std=c++0x -fPIC -O3 -funroll-loops -Wall")
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
