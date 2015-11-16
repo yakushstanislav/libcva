@@ -35,7 +35,7 @@ TEST(Scaling, ScaleDown)
 
     for (std::size_t scaleValue = 16; scaleValue < LENA_GRAY8_WIDTH; scaleValue += 16)
     {
-        ImagePlane<unsigned char> planeDest(scaleValue, scaleValue, scaleValue);
+        ImagePlane<unsigned char> planeDest(scaleValue, scaleValue);
 
         bilinearScale(plane, planeDest);
     }

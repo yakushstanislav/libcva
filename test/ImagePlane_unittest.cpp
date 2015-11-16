@@ -29,8 +29,8 @@ using namespace CVA;
 
 TEST(ImagePlane, InitializationEmpty)
 {
-    const ImagePlane<unsigned char> plane1(128, 128, 128);
-    const ImagePlane<unsigned long> plane2(4000, 4000, 4000);
+    const ImagePlane<unsigned char> plane1(128, 128);
+    const ImagePlane<unsigned long> plane2(4000, 4000);
 
     EXPECT_EQ(plane1.pixels(), 128 * 128);
     EXPECT_EQ(plane1.size(), plane1.pixels() * sizeof(unsigned char));
@@ -110,7 +110,7 @@ TEST(ImagePlane, GetPixelPtrByXY)
 
 TEST(ImagePlane, SetPixel)
 {
-    ImagePlane<unsigned char> plane(512, 512, 512);
+    ImagePlane<unsigned char> plane(512, 512);
 
     plane.setPixel(128);
 
@@ -122,7 +122,7 @@ TEST(ImagePlane, SetPixel)
 
 TEST(ImagePlane, SetPixelByIndex)
 {
-    ImagePlane<unsigned char> plane(256, 256, 256);
+    ImagePlane<unsigned char> plane(256, 256);
 
     for (std::size_t i = 0; i < plane.pixels(); i++)
     {
@@ -137,7 +137,7 @@ TEST(ImagePlane, SetPixelByIndex)
 
 TEST(ImagePlane, SetPixelByXY)
 {
-    ImagePlane<unsigned char> plane(256, 256, 256);
+    ImagePlane<unsigned char> plane(256, 256);
 
     for (std::size_t x = 0; x < plane.width(); x++)
     {
@@ -158,7 +158,7 @@ TEST(ImagePlane, SetPixelByXY)
 
 TEST(ImagePlane, Copy)
 {
-    ImagePlane<unsigned char> plane1(256, 256, 256);
+    ImagePlane<unsigned char> plane1(256, 256);
 
     for (std::size_t x = 0; x < plane1.width(); x++)
     {
@@ -168,7 +168,7 @@ TEST(ImagePlane, Copy)
         }
     }
 
-    ImagePlane<unsigned char> plane2(256, 256, 256);
+    ImagePlane<unsigned char> plane2(256, 256);
 
     plane2 = plane1;
 

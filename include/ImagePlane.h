@@ -29,8 +29,8 @@ template<typename T>
 class ImagePlane
 {
 public:
-    ImagePlane(const std::size_t width, const std::size_t height, const std::size_t stride) :
-        _width(width), _height(height), _stride(stride), _isCopy(true)
+    ImagePlane(const std::size_t width, const std::size_t height) :
+        _width(width), _height(height), _stride(width), _isCopy(true)
     {
         _size = width * height;
         _data = new T[_size];
