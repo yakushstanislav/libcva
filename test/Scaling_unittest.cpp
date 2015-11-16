@@ -33,7 +33,7 @@ TEST(Scaling, ScaleDown)
     const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
         LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
 
-    for (std::size_t scaleValue = 16; scaleValue < LENA_GRAY8_WIDTH; scaleValue += 32)
+    for (std::size_t scaleValue = 16; scaleValue < LENA_GRAY8_WIDTH; scaleValue += 16)
     {
         ImagePlane<unsigned char> planeDest(scaleValue, scaleValue, scaleValue);
 
