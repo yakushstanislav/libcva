@@ -28,6 +28,19 @@
 using namespace CVA;
 using namespace CVA::Scaling;
 
+TEST(Scaling, ScaleUp)
+{
+    const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
+        LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
+
+    for (std::size_t scaleValue = LENA_GRAY8_WIDTH; scaleValue < LENA_GRAY8_WIDTH * 4; scaleValue += 128)
+    {
+        ImagePlane<unsigned char> planeDest(scaleValue, scaleValue);
+
+        bilinearScale(plane, planeDest);
+    }
+}
+
 TEST(Scaling, ScaleDown)
 {
     const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),

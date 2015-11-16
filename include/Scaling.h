@@ -30,8 +30,8 @@ namespace Scaling {
 template<typename T>
 void bilinearScale(const ImagePlane<T>& src, ImagePlane<T>& dest)
 {
-    const double ratioX = (float)src.width() / (float)dest.width();
-    const double ratioY = (float)src.height() / (float)dest.height();
+    const float ratioX = (float)(src.width() - 1) / (float)dest.width();
+    const float ratioY = (float)(src.height() - 1) / (float)dest.height();
     std::size_t offset = 0;
 
     for (std::size_t h = 0; h < dest.height(); h++)
@@ -40,8 +40,8 @@ void bilinearScale(const ImagePlane<T>& src, ImagePlane<T>& dest)
         {
             const std::size_t x = ratioX * w;
             const std::size_t y = ratioY * h;
-            const double diffX = (ratioX * w) - x;
-            const double diffY = (ratioY * h) - y;
+            const float diffX = (ratioX * w) - x;
+            const float diffY = (ratioY * h) - y;
             const std::size_t index = y * src.width() + x;
 
             const T a = src[index] & 0xFF;
