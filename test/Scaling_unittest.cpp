@@ -27,17 +27,24 @@
 
 using namespace CVA;
 using namespace CVA::Scaling;
+using namespace CVA::Utils;
 
 TEST(Scaling, ScaleUp)
 {
     const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
         LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
 
-    for (std::size_t scaleValue = LENA_GRAY8_WIDTH; scaleValue < LENA_GRAY8_WIDTH * 4; scaleValue += 128)
+    for (std::size_t scaleValue = LENA_GRAY8_WIDTH; scaleValue < LENA_GRAY8_WIDTH * 8; scaleValue += 128)
     {
         ImagePlane<unsigned char> planeDest(scaleValue, scaleValue);
 
         bilinearScale(plane, planeDest);
+
+        std::ostringstream path;
+
+        path << "test_scale_up_" << scaleValue << "x" << scaleValue << ".pgm";
+
+        saveFilePGM(planeDest, path.str());
     }
 }
 
@@ -46,10 +53,16 @@ TEST(Scaling, ScaleDown)
     const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
         LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
 
-    for (std::size_t scaleValue = 16; scaleValue < LENA_GRAY8_WIDTH; scaleValue += 16)
+    for (std::size_t scaleValue = 8; scaleValue < LENA_GRAY8_WIDTH; scaleValue += 8)
     {
         ImagePlane<unsigned char> planeDest(scaleValue, scaleValue);
 
         bilinearScale(plane, planeDest);
+
+        std::ostringstream path;
+
+        path << "test_scale_down_" << scaleValue << "x" << scaleValue << ".pgm";
+
+        saveFilePGM(planeDest, path.str());
     }
 }

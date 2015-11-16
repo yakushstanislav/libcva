@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2014 Stanislav Yakush (st.yakush@yandex.ru)
+   Copyright (c) 2015 Stanislav Yakush (st.yakush@yandex.ru)
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
@@ -20,29 +20,43 @@
    SOFTWARE.
 */
 
-#ifndef __CVA_H__
-#define __CVA_H__
+#ifndef __CVA_UTILS_H__
+#define __CVA_UTILS_H__
 
-#include <cstddef>
-#include <cstring>
-#include <cassert>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
-#include <vector>
-#include <array>
-#include <map>
+namespace CVA {
 
-#include "ImagePlane.h"
-#include "Image.h"
-#include "Matrix.h"
-#include "Base.h"
-#include "Math.h"
-#include "Filter.h"
-#include "Point.h"
-#include "Drawing.h"
-#include "Cropping.h"
-#include "Scaling.h"
-#include "Utils.h"
+namespace Utils {
+
+template<typename T>
+bool saveFilePGM(const ImagePlane<T>& plane, const std::string& path)
+{
+    std::ofstream file(path, std::ios::out | std::ios::trunc | std::ios::binary);
+
+    std::ostringstream ss;
+
+    ss << "P5\n" << plane.width() << " " << plane.height() << "\n255\n";
+
+    const std::string& header = ss.str();
+
+    if (!file.is_open())
+        return false;
+
+    if (!file.write(const_cast<char*>(header.c_str()), header.size()))
+        goto error;
+
+    if (!file.write(reinterpret_cast<char*>(plane.data()), plane.size()))
+        goto error;
+
+    file.close();
+    return true;
+
+error:
+    file.close();
+    return false;
+}
+
+};
+
+};
 
 #endif
