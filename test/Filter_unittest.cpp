@@ -23,8 +23,11 @@
 #include <gtest/gtest.h>
 #include <cva/cva.h>
 
+#include "LenaGray8.h"
+
 using namespace CVA;
 using namespace CVA::Filter;
+using namespace CVA::Utils;
 
 TEST(Filter, MatrixFilter3x3)
 {
@@ -42,4 +45,16 @@ TEST(Filter, MedianFilter3x3)
     const Matrix3x3<int> matrix(10, 50, 200, 150, 70, 30, 20, 15, 80);
 
     EXPECT_EQ(applyMedianFilter3x3(matrix), 50);
+}
+
+TEST(Filter, MedianFilter3x3_ImagePlane)
+{
+    const ImagePlane<unsigned char> plane(lenaGray8, sizeof(lenaGray8),
+        LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT, LENA_GRAY8_WIDTH, false);
+
+    ImagePlane<unsigned char> planeDest(LENA_GRAY8_WIDTH, LENA_GRAY8_HEIGHT);
+
+    applyMedianFilter3x3(plane, planeDest);
+
+    saveFilePGM(planeDest, "test_median_filter.pgm");
 }
