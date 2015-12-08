@@ -52,9 +52,9 @@ void applyMatrixFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest, const M
 {
     assert(src.width() == dest.width() && src.height() == dest.height());
 
-    for (std::size_t x = 1; x < src.width() - 1; x++)
+    for (std::size_t y = 1; y < src.height() - 1; y++)
     {
-        for (std::size_t y = 1; y < src.height() - 1; y++)
+        for (std::size_t x = 1; x < src.width() - 1; x++)
         {
             const Matrix3x3<T>& matrix = Base::getMatrix3x3(src, x, y);
             const T pixel = applyMatrixFilter3x3(matrix, convolution, div, offset);
@@ -75,9 +75,9 @@ void applyMedianFilter3x3(const ImagePlane<T>& src, ImagePlane<T>& dest)
 {
     assert(src.width() == dest.width() && src.height() == dest.height());
 
-    for (std::size_t x = 1; x < src.width() - 1; x++)
+    for (std::size_t y = 1; y < src.height() - 1; y++)
     {
-        for (std::size_t y = 1; y < src.height() - 1; y++)
+        for (std::size_t x = 1; x < src.width() - 1; x++)
         {
             const Matrix3x3<T>& matrix = Base::getMatrix3x3(src, x, y);
 
