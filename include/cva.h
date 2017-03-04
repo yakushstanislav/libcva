@@ -26,9 +26,11 @@
 #include <cstddef>
 #include <cstring>
 #include <cassert>
+#include <cmath>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <numeric>
 #include <vector>
 #include <array>
 #include <map>
